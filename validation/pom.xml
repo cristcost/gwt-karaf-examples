@@ -10,25 +10,68 @@
 		<artifactId>gwt-karaf-main</artifactId>
 	</parent>
 
-	<artifactId>gwt-karaf-starter</artifactId>
+	<artifactId>gwt-karaf-validation</artifactId>
 	<packaging>war</packaging>
-	<name>GWT on Karaf Examples :: Starter Sample</name>
+	<name>GWT on Karaf Examples :: Validation Sample</name>
 
 	<dependencies>
 
 		<!-- GWT Dependencies -->
 		<dependency>
 			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-user</artifactId>
-			<version>${gwt.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-servlet</artifactId>
 			<version>${gwt.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+
+		<!-- Hibernate bean validation binary for the server -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.1.0.Final</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.xml.bind</groupId>
+					<artifactId>jaxb-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.xml.bind</groupId>
+					<artifactId>jaxb-impl</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Hibernate bean validation source for the GWT client -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.1.0.Final</version>
+			<!--<version>5.0.0.Final</version> -->
+			<classifier>sources</classifier>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.xml.bind</groupId>
+					<artifactId>jaxb-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.xml.bind</groupId>
+					<artifactId>jaxb-impl</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -71,7 +114,7 @@
 							<goal>generateAsync</goal>
 						</goals>
 						<configuration>
-							<servicePattern>com/google/gwt/sample/starter/client/*Service.java</servicePattern>
+							<servicePattern>com/google/gwt/sample/validation/client/*Service.java</servicePattern>
 							<generateDirectory>${project.build.directory}/generated/src/main/java</generateDirectory>
 						</configuration>
 					</execution>
@@ -79,10 +122,10 @@
 				<configuration>
 					<style>PRETTY</style>
 					<!-- URL that should be automatically opened in the GWT shell (gwt:run). -->
-					<runTarget>Starter.html</runTarget>
+					<runTarget>Validation.html</runTarget>
 					<!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
 					<compileReport>true</compileReport>
-					<module>com.google.gwt.sample.starter.Starter</module>
+					<module>com.google.gwt.sample.validation.Validation</module>
 					<logLevel>INFO</logLevel>
 				</configuration>
 				<dependencies>
@@ -128,8 +171,11 @@
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Web-ContextPath>/${project.artifactId}</Web-ContextPath>
 						<Bundle-ClassPath>.,WEB-INF/classes</Bundle-ClassPath>
+						<Private-Package>
+							org.hibernate.validator.engine.*
+						</Private-Package>
 						<Export-Package>
-							!com.google.gwt.sample.starter.client
+							!com.google.gwt.sample.validation.client
 						</Export-Package>
 						<Import-Package>
 							com.google.gwt.user.client.rpc,

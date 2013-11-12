@@ -1,6 +1,8 @@
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
+target/
+.settings/
+.checkstyle
+.classpath
+.pmd
+.pmdruleset
+.project
+.DS_Store
