@@ -21,7 +21,7 @@
 	<modules>
 		<module>starter</module>
 		<module>validation</module>
-		<!--<module>dynatable</module>-->
+		<module>dynatable</module>
 		<!--<module>dynatablerf</module>-->
 		<!--<module>logexample</module>-->
 		<!--<module>mobilewebapp</module>-->
