@@ -72,6 +72,20 @@
 			</exclusions>
 		</dependency>
 
+		<!-- Required by Hibernate validator because slf4j-log4j is optional in 
+			the hibernate-validator POM -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -171,14 +185,19 @@
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Web-ContextPath>/${project.artifactId}</Web-ContextPath>
 						<Bundle-ClassPath>.,WEB-INF/classes</Bundle-ClassPath>
-						<Private-Package>
-							org.hibernate.validator.engine.*
-						</Private-Package>
-						<Export-Package>
-							!com.google.gwt.sample.validation.client
-						</Export-Package>
+						<!-- Don't export anything -->
+						<Export-Package />
+						<!-- Some client code is required on server, some don't -->
 						<Import-Package>
-							com.google.gwt.user.client.rpc,
+							com.google.gwt.user.client.rpc.*,
+							com.google.gwt.user.client.rpc.core.com.google.gwt.core.shared,
+							com.google.gwt.user.client.rpc.core.java.lang,
+							com.google.gwt.user.client.rpc.core.java.math,
+							com.google.gwt.user.client.rpc.core.java.sql,
+							com.google.gwt.user.client.rpc.core.java.util,
+							com.google.gwt.user.client.rpc.core.java.util.logging,
+							com.google.gwt.user.server.rpc.core.java.lang,
+							com.google.gwt.user.server.rpc.core.java.util,
 							!com.google.gwt.*.client.*,
 							*
 						</Import-Package>

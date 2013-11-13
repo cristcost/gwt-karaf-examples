@@ -19,7 +19,7 @@
 		<!-- GWT Dependencies -->
 		<dependency>
 			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-dev</artifactId>
+			<artifactId>gwt-servlet</artifactId>
 			<version>${gwt.version}</version>
 			<scope>runtime</scope>
 		</dependency>
@@ -171,14 +171,19 @@
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Web-ContextPath>/${project.artifactId}</Web-ContextPath>
 						<Bundle-ClassPath>.,WEB-INF/classes</Bundle-ClassPath>
-						<Private-Package>
-							org.hibernate.validator.engine.*
-						</Private-Package>
-						<Export-Package>
-							!com.google.gwt.sample.validation.client
-						</Export-Package>
+						<!-- Don't export anything -->
+						<Export-Package />
+						<!-- Some client code is required on server, some don't -->
 						<Import-Package>
-							com.google.gwt.user.client.rpc,
+							com.google.gwt.user.client.rpc.*,
+							com.google.gwt.user.client.rpc.core.com.google.gwt.core.shared,
+							com.google.gwt.user.client.rpc.core.java.lang,
+							com.google.gwt.user.client.rpc.core.java.math,
+							com.google.gwt.user.client.rpc.core.java.sql,
+							com.google.gwt.user.client.rpc.core.java.util,
+							com.google.gwt.user.client.rpc.core.java.util.logging,
+							com.google.gwt.user.server.rpc.core.java.lang,
+							com.google.gwt.user.server.rpc.core.java.util,
 							!com.google.gwt.*.client.*,
 							*
 						</Import-Package>
