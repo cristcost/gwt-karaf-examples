@@ -69,6 +69,11 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.6.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.web.bindery</groupId>
+			<artifactId>requestfactory-apt</artifactId>
+			<version>${gwt.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -85,21 +90,6 @@
 			</resource>
 		</resources>
 		<plugins>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<dependencies>
-					<!-- Need to run the RF Validation tool. This works on both the command-line 
-						and in Eclipse, provided that m2e-apt is installed. -->
-					<dependency>
-						<groupId>com.google.web.bindery</groupId>
-						<artifactId>requestfactory-apt</artifactId>
-						<version>${gwt.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -191,7 +181,10 @@
 							com.google.gwt.user.client.rpc.core.java.util.logging,
 							com.google.gwt.user.server.rpc.core.java.lang,
 							com.google.gwt.user.server.rpc.core.java.util,
+							com.google.web.bindery.requestfactory.server,
 							!com.google.gwt.*.client.*,
+							!com.google.web.bindery.*.client.*,
+							!com.google.web.bindery.*.impl.*,
 							*
 						</Import-Package>
 					</instructions>
