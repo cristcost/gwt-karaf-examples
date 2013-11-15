@@ -23,8 +23,8 @@
 		<module>validation</module>
 		<module>dynatable</module>
 		<module>dynatablerf</module>
+		<module>mobilewebapp</module>
 		<!--<module>logexample</module>-->
-		<!--<module>mobilewebapp</module>-->
 	</modules>
 	
 </project>
