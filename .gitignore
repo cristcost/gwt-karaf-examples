@@ -6,3 +6,4 @@ target/
 .pmdruleset
 .project
 .DS_Store
+.factorypath
