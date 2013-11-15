@@ -188,6 +188,7 @@
 							com.google.gwt.user.server.rpc.core.java.lang,
 							com.google.gwt.user.server.rpc.core.java.util,
 							com.google.web.bindery.requestfactory.server,
+							com.google.web.bindery.requestfactory.vm.impl,
 							!com.google.gwt.*.client.*,
 							!com.google.web.bindery.*.client.*,
 							!com.google.web.bindery.*.impl.*,
