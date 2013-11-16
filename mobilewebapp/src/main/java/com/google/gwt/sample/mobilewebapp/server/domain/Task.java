@@ -15,6 +15,7 @@
  */
 package com.google.gwt.sample.mobilewebapp.server.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,14 +26,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * A task used in the task list. This is a monolothic implementation of a data object
- * for use with {@code RequestFactory}. Better patterns make use of Locators and
- * ServiceLocators to simplify the boilerplate required to expose a data object.
+ * A task used in the task list. This is a monolothic implementation of a data
+ * object for use with {@code RequestFactory}. Better patterns make use of
+ * Locators and ServiceLocators to simplify the boilerplate required to expose a
+ * data object.
  * <p>
- * See <a
- * href='http://turbomanage.wordpress.com/2011/03/25/using-gwt-requestfactory-with-objectify/'
- * >this fine blog post</a>,
- * for an example.
+ * See <a href=
+ * 'http://turbomanage.wordpress.com/2011/03/25/using-gwt-requestfactory-with-obje
+ * c t i f y / ' >this fine blog post</a>, for an example.
  */
 @Entity
 public class Task {
@@ -42,23 +43,25 @@ public class Task {
    */
   @SuppressWarnings("unchecked")
   public static List<Task> findAllTasks() {
-    // TODO: move this method to a service object and get rid of EMF (e.g. use a ServiceLocator)
-    EMF emf = EMF.get();
 
-    Query<Task> q = emf.ofy().query(Task.class).filter("userId", currentUserId());
+    // TODO: translate to JPA
+    // EMF emf = EMF.get();
+    // Query<Task> q = emf.ofy().query(Task.class).filter("userId",
+    // currentUserId());
+    // List<Task> list = q.list();
 
-    List<Task> list = q.list();
     /*
      * If this is the first time running the app, populate the datastore with
      * some default tasks and re-query the datastore for them.
      */
-    if (list.size() == 0) {
-      populateDatastore();
-      q = emf.ofy().query(Task.class).filter("userId", currentUserId());
-      list = q.list();
-    }
+    // if (list.size() == 0) {
+    // populateDatastore();
+    // q = emf.ofy().query(Task.class).filter("userId", currentUserId());
+    // list = q.list();
+    // }
 
-    return list;
+    // return list;
+    return new ArrayList<Task>();
   }
 
   /**
@@ -68,18 +71,20 @@ public class Task {
    * @return the associated {@link Task}, or null if not found
    */
   public static Task findTask(Long id) {
-    // TODO: move this method to a service object and get rid of EMF (e.g. use a ServiceLocator)
+    // TODO: move this method to a service object and get rid of EMF (e.g. use a
+    // ServiceLocator)
     if (id == null) {
       return null;
     }
 
-    EMF emf = EMF.get();
-    Task task = emf.ofy().find(Task.class, id);
-    if (task != null && task.userId.equals(currentUserId())) {
-      return task;
-    } else {
-      return null;
-    }
+    // TODO: translate to JPA
+    // EMF emf = EMF.get();
+    // Task task = emf.ofy().find(Task.class, id);
+    // if (task != null && task.userId.equals(currentUserId())) {
+    // return task;
+    // } else {
+    return null;
+    // }
   }
 
   private static String currentUserId() {
@@ -93,7 +98,8 @@ public class Task {
   @SuppressWarnings("deprecation")
   private static void populateDatastore() {
     // TODO: move this method to a service object (e.g. use a ServiceLocator)
-    EMF emf = EMF.get();
+    // TODO: translate to JPA
+    // EMF emf = EMF.get();
 
     {
       // Task 0.
@@ -102,7 +108,7 @@ public class Task {
       task0.setNotes("This game is impossible!");
       task0.setDueDate(new Date(100, 4, 20));
       task0.userId = currentUserId();
-      emf.ofy().put(task0);
+      // emf.ofy().put(task0);
     }
     {
       // Task 1.
@@ -110,7 +116,7 @@ public class Task {
       task1.setName("Make a million dollars");
       task1.setNotes("Then spend it all on Android apps");
       task1.userId = currentUserId();
-      emf.ofy().put(task1);
+      // emf.ofy().put(task1);
     }
     {
       // Task 2.
@@ -118,14 +124,14 @@ public class Task {
       task2.setName("Buy a dozen eggs");
       task2.setNotes("of the chicken variety");
       task2.userId = currentUserId();
-      emf.ofy().put(task2);
+      // emf.ofy().put(task2);
     }
     {
       // Task 3.
       Task task3 = new Task();
       task3.setName("Complete all tasks");
       task3.userId = currentUserId();
-      emf.ofy().put(task3);
+      // emf.ofy().put(task3);
     }
   }
 
@@ -180,7 +186,8 @@ public class Task {
    * Get the version of this datastore object.
    */
   public Integer getVersion() {
-    // TODO: Move this method to a superclass that implements a persistence layer
+    // TODO: Move this method to a superclass that implements a persistence
+    // layer
     return version;
   }
 
@@ -188,35 +195,39 @@ public class Task {
    * Persist this object in the data store.
    */
   public void persist() {
-    // TODO: Move this method to a superclass that implements a persistence layer
-    EMF emf = EMF.get();
+    // TODO: Move this method to a superclass that implements a persistence
+    // layer
+    // TODO: translate to JPA
+    // EMF emf = EMF.get();
 
     ++version;
 
     // Set the user id if this is a new task.
-    String curUserId = currentUserId();
-    if (userId == null) {
-      userId = curUserId;
-    }
+    // String curUserId = currentUserId();
+    // if (userId == null) {
+    // userId = curUserId;
+    // }
 
     // Verify the current user owns the task before updating it.
-    if (curUserId.equals(userId)) {
-      emf.ofy().put(this);
-    }
+    // if (curUserId.equals(userId)) {
+    // emf.ofy().put(this);
+    // }
   }
 
   /**
    * Remove this object from the data store.
    */
   public void remove() {
-    // TODO: Move this method to a superclass that implements a persistence layer
-    EMF emf = EMF.get();
-
-    Task task = emf.ofy().find(Task.class, this.id);
-
-    if (currentUserId().equals(task.userId)) {
-      emf.ofy().delete(task);
-    }
+    // TODO: Move this method to a superclass that implements a persistence
+    // layer
+    // TODO: translate to JPA
+    // EMF emf = EMF.get();
+    //
+    // Task task = emf.ofy().find(Task.class, this.id);
+    //
+    // if (currentUserId().equals(task.userId)) {
+    // emf.ofy().delete(task);
+    // }
   }
 
   /**
@@ -252,7 +263,8 @@ public class Task {
 
   @PrePersist
   void onPersist() {
-    // TODO: Move this method to a superclass that implements a persistence layer
+    // TODO: Move this method to a superclass that implements a persistence
+    // layer
     ++this.version;
   }
 }

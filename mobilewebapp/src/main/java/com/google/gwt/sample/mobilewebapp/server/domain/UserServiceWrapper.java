@@ -15,9 +15,6 @@
  */
 package com.google.gwt.sample.mobilewebapp.server.domain;
 
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserServiceFactory;
-
 /**
  * Wrapper around the {@link com.google.appengine.api.users.UserService} GAE
  * api.
@@ -35,14 +32,15 @@ public class UserServiceWrapper {
 
   /**
    * Get the current user.
-   * {@link com.google.gwt.sample.gaerequest.server.SampleAuthFilter} should ensure
-   * that the user is logged in, but we take precautions here as well.
+   * {@link com.google.gwt.sample.gaerequest.server.SampleAuthFilter} should
+   * ensure that the user is logged in, but we take precautions here as well.
    * 
    * @return the current user
    * @throws RuntimeException if the user is not logged in
    */
   public User getCurrentUser() {
-    User currentUser = UserServiceFactory.getUserService().getCurrentUser();
+    // TODO: implement a kind of user service
+    User currentUser = null;
     if (currentUser == null) {
       throw new RuntimeException("User not logged in");
     }
