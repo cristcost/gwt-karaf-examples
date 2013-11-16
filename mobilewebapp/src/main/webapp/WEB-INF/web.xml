@@ -45,7 +45,7 @@
   </filter>
   <filter-mapping>
     <filter-name>SampleAuthFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/gwtRequest/*</url-pattern>
   </filter-mapping>
 
   <!-- Default page to serve -->
