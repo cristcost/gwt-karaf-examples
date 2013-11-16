@@ -1,15 +1,19 @@
 package com.google.gwt.sample.gaerequest.server;
 
 public class UserService {
+  
+  private static String userId = null;
 
   public boolean isUserLoggedIn() {
-    // TODO Auto-generated method stub
-    return false;
+    return userId != null;
   }
 
-  public String createLoginURL(String redirectUrl) {
-    // TODO Auto-generated method stub
-    return null;
+  public String createLoginURL() {
+
+    return "/Login.html";
   }
 
+  public void loginUser(String loginUserId) {
+    this.userId = loginUserId;
+  }
 }

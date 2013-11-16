@@ -15,8 +15,6 @@
  */
 package com.google.gwt.sample.gaerequest.server;
 
-import com.google.gwt.sample.gaerequest.shared.GaeHelper;
-
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -44,15 +42,17 @@ public class SampleAuthFilter implements Filter {
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     HttpServletResponse response = (HttpServletResponse) servletResponse;
 
+    String userId = request.getParameter("userId");
+    if (userId != null && userId.length() > 0) {
+      userService.loginUser(userId);
+    } 
+    
     if (!userService.isUserLoggedIn()) {
-      String redirectUrl = request.getHeader(GaeHelper.REDIRECT_URL_HTTP_HEADER_NAME);
-      if (redirectUrl == null || redirectUrl.length() == 0) {
-        // Default to the root page if the redirecturl isn't specified in the request.
-        redirectUrl = "/";
-      }
-      response.setHeader("login", userService.createLoginURL(redirectUrl));
+      response.setHeader("login", userService.createLoginURL());
       response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
       return;
+    } else if (request.getParameter("logOut") != null) {
+      userService.loginUser(null);
     }
 
     filterChain.doFilter(request, response);

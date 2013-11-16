@@ -1,0 +1,48 @@
+<!doctype html>
+<!-- The DOCTYPE declaration above will set the    -->
+<!-- browser's rendering engine into               -->
+<!-- "Standards Mode". Replacing this declaration  -->
+<!-- with a "Quirks Mode" doctype may lead to some -->
+<!-- differences in layout.                        -->
+
+<html manifest="mobilewebapp/appcache.nocache.manifest">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<!--                                                               -->
+<!-- These meta tags tell the mobile browser that the app is       -->
+<!-- formatted for mobile browsers and should not be zoomed in by  -->
+<!-- default.                                                      -->
+<!--                                                               -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+
+<!--                                                               -->
+<!-- Consider inlining CSS to reduce the number of requested files -->
+<!--                                                               -->
+<link type="text/css" rel="stylesheet" href="MobileWebApp.css">
+
+<!-- Specify the shortcut icon. -->
+<link rel="shortcut icon" href="favicon.ico" />
+
+<!-- Specify the bookmark icon used for homepage shortcuts. -->
+<link rel="apple-touch-icon" href="app_icon.png" />
+<link rel="apple-touch-icon-precomposed" href="app_icon.png" />
+
+<!-- Specify the title in the browser tab. -->
+<title>Cloud Tasks Login</title>
+
+</head>
+
+<!--                                           -->
+<!-- The body can have arbitrary html, or      -->
+<!-- you can leave the body empty if you want  -->
+<!-- to create a completely dynamic UI.        -->
+<!--                                           -->
+<body>
+	<h1>Insert a username:</h1>
+	<form action="MobileWebApp.html" method="GET">
+		<input type="text" name="userId" />
+		<input type="submit" name="login" value="Log In" />
+	</form>
+</html>

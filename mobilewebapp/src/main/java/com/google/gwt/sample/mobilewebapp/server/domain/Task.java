@@ -32,8 +32,8 @@ import javax.validation.constraints.Size;
  * data object.
  * <p>
  * See <a href=
- * 'http://turbomanage.wordpress.com/2011/03/25/using-gwt-requestfactory-with-obje
- * c t i f y / ' >this fine blog post</a>, for an example.
+ * 'http://turbomanage.wordpress.com/2011/03/25/using-gwt-requestfactory-with-ob
+ * j e c t i f y / ' >this fine blog post</a>, for an example.
  */
 @Entity
 public class Task {
@@ -45,6 +45,7 @@ public class Task {
   public static List<Task> findAllTasks() {
 
     // TODO: translate to JPA
+    System.out.println("findAllTasks(" + ")");
     // EMF emf = EMF.get();
     // Query<Task> q = emf.ofy().query(Task.class).filter("userId",
     // currentUserId());
@@ -78,6 +79,7 @@ public class Task {
     }
 
     // TODO: translate to JPA
+    System.out.println("findTask(" + id + ")");
     // EMF emf = EMF.get();
     // Task task = emf.ofy().find(Task.class, id);
     // if (task != null && task.userId.equals(currentUserId())) {
@@ -99,6 +101,7 @@ public class Task {
   private static void populateDatastore() {
     // TODO: move this method to a service object (e.g. use a ServiceLocator)
     // TODO: translate to JPA
+    System.out.println("populateDatastore(" + ")");
     // EMF emf = EMF.get();
 
     {
@@ -198,6 +201,7 @@ public class Task {
     // TODO: Move this method to a superclass that implements a persistence
     // layer
     // TODO: translate to JPA
+    System.out.println("persist(" + ")");
     // EMF emf = EMF.get();
 
     ++version;
@@ -221,6 +225,7 @@ public class Task {
     // TODO: Move this method to a superclass that implements a persistence
     // layer
     // TODO: translate to JPA
+    System.out.println("remove(" + ")");
     // EMF emf = EMF.get();
     //
     // Task task = emf.ofy().find(Task.class, this.id);
