@@ -73,11 +73,11 @@
 
 
 		<dependency>
-		  <groupId>org.eclipse.persistence</groupId>
-		  <artifactId>javax.persistence</artifactId>
-		  <version>${jpa.eclipselink.version}</version>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>javax.persistence</artifactId>
+			<version>${jpa.eclipselink.version}</version>
 		</dependency>
-		
+
 		<!-- GIN and Guice for IoC / DI -->
 		<dependency>
 			<groupId>com.google.inject</groupId>
@@ -90,7 +90,7 @@
 			<version>1.0</version>
 		</dependency>
 
-		<!-- Use the JSR 330 injection interfaces-->
+		<!-- Use the JSR 330 injection interfaces -->
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
@@ -117,7 +117,8 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Annotation processor goes into main dependency for latest version of maven -->
+		<!-- Annotation processor goes into main dependency for latest version 
+			of maven -->
 		<dependency>
 			<groupId>com.google.web.bindery</groupId>
 			<artifactId>requestfactory-apt</artifactId>
@@ -155,10 +156,12 @@
 				</configuration>
 			</plugin>
 
-			<!-- Add source folders to test classpath in order to run gwt-tests as normal junit-tests -->
+			<!-- Add source folders to test classpath in order to run gwt-tests as 
+				normal junit-tests -->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.5</version>
+
 				<configuration>
 					<additionalClasspathElements>
 						<additionalClasspathElement>${project.build.sourceDirectory}</additionalClasspathElement>
@@ -255,6 +258,7 @@
 							com.google.gwt.user.server.rpc.core.java.util,
 							com.google.web.bindery.requestfactory.server,
 							com.google.web.bindery.requestfactory.vm.impl,
+							!com.google.gwt.core.ext.*,
 							!com.google.gwt.*.client.*,
 							!com.google.web.bindery.*.client.*,
 							!com.google.web.bindery.*.impl.*,
