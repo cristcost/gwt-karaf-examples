@@ -32,7 +32,7 @@ public class UserServiceWrapper {
 
   /**
    * Get the current user.
-   * {@link com.google.gwt.sample.gaerequest.server.SampleAuthFilter} should
+   * {@link com.google.gwt.sample.authrequest.server.SampleAuthFilter} should
    * ensure that the user is logged in, but we take precautions here as well.
    * 
    * @return the current user

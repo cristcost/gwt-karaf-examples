@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.sample.gaerequest.client;
+package com.google.gwt.sample.authrequest.client;
 
 import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.EventBus;
@@ -23,32 +23,32 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 /**
  * An event posted when an authentication failure is detected.
  */
-public class GaeAuthenticationFailureEvent extends Event<GaeAuthenticationFailureEvent.Handler> {
+public class SampleAuthenticationFailureEvent extends Event<SampleAuthenticationFailureEvent.Handler> {
 
   /**
    * Implemented by handlers of this type of event.
    */
   public interface Handler {
     /**
-     * Called when a {@link GaeAuthenticationFailureEvent} is fired.
+     * Called when a {@link SampleAuthenticationFailureEvent} is fired.
      * 
-     * @param requestEvent a {@link GaeAuthenticationFailureEvent} instance
+     * @param requestEvent a {@link SampleAuthenticationFailureEvent} instance
      */
-    void onAuthFailure(GaeAuthenticationFailureEvent requestEvent);
+    void onAuthFailure(SampleAuthenticationFailureEvent requestEvent);
   }
 
   private static final Type<Handler> TYPE = new Type<Handler>();
 
   /**
-   * Register a {@link GaeAuthenticationFailureEvent.Handler} on an
+   * Register a {@link SampleAuthenticationFailureEvent.Handler} on an
    * {@link EventBus}.
    * 
    * @param eventBus the {@link EventBus}
-   * @param handler a {@link GaeAuthenticationFailureEvent.Handler}
+   * @param handler a {@link SampleAuthenticationFailureEvent.Handler}
    * @return a {@link HandlerRegistration} instance
    */
   public static HandlerRegistration register(EventBus eventBus,
-      GaeAuthenticationFailureEvent.Handler handler) {
+      SampleAuthenticationFailureEvent.Handler handler) {
     return eventBus.addHandler(TYPE, handler);
   }
 
@@ -59,7 +59,7 @@ public class GaeAuthenticationFailureEvent extends Event<GaeAuthenticationFailur
    * 
    * @param loginUrl the url used to login
    */
-  public GaeAuthenticationFailureEvent(String loginUrl) {
+  public SampleAuthenticationFailureEvent(String loginUrl) {
     this.loginUrl = loginUrl;
   }
 

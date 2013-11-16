@@ -1,7 +1,7 @@
-package com.google.gwt.sample.gaerequest.server;
+package com.google.gwt.sample.authrequest.server;
 
 public class UserService {
-  
+
   private static String userId = null;
 
   public boolean isUserLoggedIn() {
@@ -15,5 +15,6 @@ public class UserService {
 
   public void loginUser(String loginUserId) {
     this.userId = loginUserId;
+    System.out.println("Logging user: " + this.userId);
   }
 }
