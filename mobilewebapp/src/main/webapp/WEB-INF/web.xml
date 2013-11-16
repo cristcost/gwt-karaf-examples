@@ -35,15 +35,15 @@
   </servlet-mapping>
 
   <filter>
-    <filter-name>GaeAuthFilter</filter-name>
+    <filter-name>SampleAuthFilter</filter-name>
     <!--
       This filter demonstrates making GAE authentication
       services visible to a RequestFactory client.
     -->
-    <filter-class>com.google.gwt.sample.gaerequest.server.GaeAuthFilter</filter-class>
+    <filter-class>com.google.gwt.sample.gaerequest.server.SampleAuthFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>GaeAuthFilter</filter-name>
+    <filter-name>SampleAuthFilter</filter-name>
     <url-pattern>/gwtRequest/*</url-pattern>
   </filter-mapping>
 
