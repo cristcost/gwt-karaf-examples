@@ -16,7 +16,7 @@
 package com.google.gwt.sample.mobilewebapp.server.domain;
 
 /**
- * Wrapper around the {@link com.google.appengine.api.users.UserService} GAE
+ * Wrapper around the {@link com.google.gwt.sample.authrequest.shared.appengine.api.users.UserService} GAE
  * api.
  */
 public class UserServiceWrapper {

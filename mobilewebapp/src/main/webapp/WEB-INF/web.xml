@@ -17,15 +17,24 @@
 		<servlet-name>requestFactoryServlet</servlet-name>
 		<servlet-class>com.google.web.bindery.requestfactory.server.RequestFactoryServlet</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>requestFactoryServlet</servlet-name>
 		<url-pattern>/gwtRequest</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>sampleLoginServlet</servlet-name>
+		<servlet-class>com.google.gwt.sample.authrequest.server.SampleLoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>sampleLoginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	
 	<filter>
 		<filter-name>SampleAuthFilter</filter-name>
-		<filter-class>com.google.gwt.sample.gaerequest.server.SampleAuthFilter</filter-class>
+		<filter-class>com.google.gwt.sample.authrequest.server.SampleAuthFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>SampleAuthFilter</filter-name>
