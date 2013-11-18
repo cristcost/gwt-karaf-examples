@@ -22,7 +22,7 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceChangeEvent;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
-import com.google.gwt.sample.gaerequest.client.ReloadOnAuthenticationFailure;
+import com.google.gwt.sample.authrequest.client.ReloadOnAuthenticationFailure;
 import com.google.gwt.sample.mobilewebapp.client.activity.AppPlaceHistoryMapper;
 import com.google.gwt.sample.mobilewebapp.client.event.ActionEvent;
 import com.google.gwt.sample.mobilewebapp.client.event.ActionNames;

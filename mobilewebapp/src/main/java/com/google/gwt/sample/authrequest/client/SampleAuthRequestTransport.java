@@ -13,13 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.sample.gaerequest.client;
+package com.google.gwt.sample.authrequest.client;
 
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.Response;
-import com.google.gwt.sample.gaerequest.shared.GaeHelper;
+import com.google.gwt.sample.authrequest.shared.AuthHelper;
 import com.google.gwt.user.client.Window.Location;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.gwt.client.DefaultRequestTransport;
@@ -27,12 +27,12 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 /**
  * Extends DefaultRequestTransport to handle the authentication failures
- * reported by {@link com.google.gwt.sample.gaerequest.server.SampleAuthFilter}.
+ * reported by {@link com.google.gwt.sample.authrequest.server.SampleAuthFilter}.
  */
-public class GaeAuthRequestTransport extends DefaultRequestTransport {
+public class SampleAuthRequestTransport extends DefaultRequestTransport {
   private final EventBus eventBus;
 
-  public GaeAuthRequestTransport(EventBus eventBus) {
+  public SampleAuthRequestTransport(EventBus eventBus) {
     this.eventBus = eventBus;
   }
 
@@ -46,7 +46,7 @@ public class GaeAuthRequestTransport extends DefaultRequestTransport {
      * /MobileWebApp.html?parem0=value0&param1=value1#hash
      */
     String redirectUrl = Location.getPath() + Location.getQueryString() + Location.getHash();
-    builder.setHeader(GaeHelper.REDIRECT_URL_HTTP_HEADER_NAME, redirectUrl);
+    builder.setHeader(AuthHelper.REDIRECT_URL_HTTP_HEADER_NAME, redirectUrl);
   }
 
   @Override
@@ -77,7 +77,7 @@ public class GaeAuthRequestTransport extends DefaultRequestTransport {
              */
             receiver
                 .onTransportFailure(new ServerFailure("Unauthenticated user", null, null, false));
-            eventBus.fireEvent(new GaeAuthenticationFailureEvent(loginUrl));
+            eventBus.fireEvent(new SampleAuthenticationFailureEvent(loginUrl));
             return;
           }
         }

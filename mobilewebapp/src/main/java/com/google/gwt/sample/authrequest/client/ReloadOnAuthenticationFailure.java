@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.google.gwt.sample.gaerequest.client;
+package com.google.gwt.sample.authrequest.client;
 
 import com.google.gwt.user.client.Window.Location;
 import com.google.web.bindery.event.shared.EventBus;
@@ -23,13 +23,13 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 /**
  * A minimal auth failure handler which takes the user a login page.
  */
-public class ReloadOnAuthenticationFailure implements GaeAuthenticationFailureEvent.Handler {
+public class ReloadOnAuthenticationFailure implements SampleAuthenticationFailureEvent.Handler {
 
-  public void onAuthFailure(GaeAuthenticationFailureEvent requestEvent) {
+  public void onAuthFailure(SampleAuthenticationFailureEvent requestEvent) {
     Location.replace(requestEvent.getLoginUrl());
   }
 
   public HandlerRegistration register(EventBus eventBus) {
-    return GaeAuthenticationFailureEvent.register(eventBus, this);
+    return SampleAuthenticationFailureEvent.register(eventBus, this);
   }
 }

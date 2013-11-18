@@ -13,12 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.sample.gaerequest.shared;
+package com.google.gwt.sample.authrequest.shared;
 
 /**
  * Helper class for sharing values on the server and client.
  */
-public interface GaeHelper {
+public interface AuthHelper {
 
   /**
    * The name of the HTTP header name used to specify the redirct url when login

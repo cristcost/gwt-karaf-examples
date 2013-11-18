@@ -20,8 +20,8 @@ import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
-import com.google.gwt.sample.gaerequest.client.GaeAuthRequestTransport;
-import com.google.gwt.sample.gaerequest.client.ReloadOnAuthenticationFailure;
+import com.google.gwt.sample.authrequest.client.ReloadOnAuthenticationFailure;
+import com.google.gwt.sample.authrequest.client.SampleAuthRequestTransport;
 import com.google.gwt.sample.mobilewebapp.client.activity.AppActivityMapper;
 import com.google.gwt.sample.mobilewebapp.client.activity.AppPlaceHistoryMapper;
 import com.google.gwt.sample.mobilewebapp.client.desktop.DesktopTaskEditView;
@@ -71,7 +71,7 @@ class ClientFactoryImpl implements ClientFactory {
   private TaskReadView taskReadView;
 
   public ClientFactoryImpl() {
-    RequestTransport requestTransport = new GaeAuthRequestTransport(eventBus);
+    RequestTransport requestTransport = new SampleAuthRequestTransport(eventBus);
     requestFactory = GWT.create(MobileWebAppRequestFactory.class);
     requestFactory.initialize(eventBus, requestTransport);
 
