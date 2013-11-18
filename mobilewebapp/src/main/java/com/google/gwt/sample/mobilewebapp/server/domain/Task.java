@@ -15,13 +15,18 @@
  */
 package com.google.gwt.sample.mobilewebapp.server.domain;
 
+import com.google.web.bindery.requestfactory.server.RequestFactoryServlet;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -38,31 +43,36 @@ import javax.validation.constraints.Size;
 @Entity
 public class Task {
 
+  private static long idCounter = 0;
+  private static final Map<String, Map<Long, Task>> taskListByUser =
+      new HashMap<String, Map<Long, Task>>();
+
   /**
    * Find all tasks for the current user.
    */
   @SuppressWarnings("unchecked")
   public static List<Task> findAllTasks() {
 
-    // TODO: translate to JPA
-    System.out.println("findAllTasks(" + ")");
-    // EMF emf = EMF.get();
-    // Query<Task> q = emf.ofy().query(Task.class).filter("userId",
-    // currentUserId());
-    // List<Task> list = q.list();
+    String currentUserId = getCurrentUserID();
 
-    /*
-     * If this is the first time running the app, populate the datastore with
-     * some default tasks and re-query the datastore for them.
-     */
-    // if (list.size() == 0) {
-    // populateDatastore();
-    // q = emf.ofy().query(Task.class).filter("userId", currentUserId());
-    // list = q.list();
-    // }
+    List<Task> list = new ArrayList<Task>(taskListByUser.get(currentUserId).values());
+    if (list.size() == 0) {
+      populateDatastore();
+      list = new ArrayList<Task>(taskListByUser.get(currentUserId).values());
+    }
 
-    // return list;
-    return new ArrayList<Task>();
+    return list;
+  }
+
+  private static String getCurrentUserID() {
+    HttpServletRequest request = RequestFactoryServlet.getThreadLocalRequest();
+    HttpSession session = request.getSession();
+
+    String userId = (String) session.getAttribute("userId");
+    if (userId != null) {
+      return userId;
+    }
+    return null;
   }
 
   /**
@@ -72,70 +82,67 @@ public class Task {
    * @return the associated {@link Task}, or null if not found
    */
   public static Task findTask(Long id) {
-    // TODO: move this method to a service object and get rid of EMF (e.g. use a
-    // ServiceLocator)
-    if (id == null) {
+    String currentUserId = getCurrentUserID();
+
+    if (id == null || !taskListByUser.containsKey(currentUserId)) {
       return null;
     }
 
-    // TODO: translate to JPA
-    System.out.println("findTask(" + id + ")");
-    // EMF emf = EMF.get();
-    // Task task = emf.ofy().find(Task.class, id);
-    // if (task != null && task.userId.equals(currentUserId())) {
-    // return task;
-    // } else {
-    return null;
-    // }
-  }
-
-  private static String currentUserId() {
-    return UserServiceWrapper.get().getCurrentUserId();
+    return taskListByUser.get(currentUserId).get(id);
   }
 
   /**
    * Populate the datastore with some default tasks. We do this to make the app
    * more intuitive on first use.
+   * 
+   * @param currentUserId
    */
   @SuppressWarnings("deprecation")
   private static void populateDatastore() {
-    // TODO: move this method to a service object (e.g. use a ServiceLocator)
-    // TODO: translate to JPA
-    System.out.println("populateDatastore(" + ")");
-    // EMF emf = EMF.get();
+    String currentUserId = getCurrentUserID();
 
+    HashMap<Long, Task> list = new HashMap<Long, Task>();
     {
       // Task 0.
       Task task0 = new Task();
+      task0.id = nextId();
       task0.setName("Beat Angry Birds");
       task0.setNotes("This game is impossible!");
       task0.setDueDate(new Date(100, 4, 20));
-      task0.userId = currentUserId();
-      // emf.ofy().put(task0);
+      task0.userId = currentUserId;
+      list.put(task0.id, task0);
     }
     {
       // Task 1.
       Task task1 = new Task();
+      task1.id = nextId();
       task1.setName("Make a million dollars");
       task1.setNotes("Then spend it all on Android apps");
-      task1.userId = currentUserId();
-      // emf.ofy().put(task1);
+      task1.userId = currentUserId;
+      list.put(task1.id, task1);
     }
     {
       // Task 2.
       Task task2 = new Task();
+      task2.id = nextId();
       task2.setName("Buy a dozen eggs");
       task2.setNotes("of the chicken variety");
-      task2.userId = currentUserId();
-      // emf.ofy().put(task2);
+      task2.userId = currentUserId;
+      list.put(task2.id, task2);
     }
     {
       // Task 3.
       Task task3 = new Task();
+      task3.id = nextId();
       task3.setName("Complete all tasks");
-      task3.userId = currentUserId();
-      // emf.ofy().put(task3);
+      task3.userId = currentUserId;
+      list.put(task3.id, task3);
     }
+    taskListByUser.put(currentUserId, list);
+  }
+
+  private static Long nextId() {
+    return ++idCounter;
   }
 
   @Id
@@ -198,41 +205,23 @@ public class Task {
    * Persist this object in the data store.
    */
   public void persist() {
-    // TODO: Move this method to a superclass that implements a persistence
-    // layer
-    // TODO: translate to JPA
-    System.out.println("persist(" + ")");
-    // EMF emf = EMF.get();
-
-    ++version;
-
-    // Set the user id if this is a new task.
-    // String curUserId = currentUserId();
-    // if (userId == null) {
-    // userId = curUserId;
-    // }
-
-    // Verify the current user owns the task before updating it.
-    // if (curUserId.equals(userId)) {
-    // emf.ofy().put(this);
-    // }
+    String currentUserId = getCurrentUserID();
+    if (!taskListByUser.containsKey(currentUserId)) {
+      taskListByUser.put(currentUserId, new HashMap<Long, Task>());
+    }
+    onPersist();
+    taskListByUser.get(currentUserId).put(id, this);
   }
 
   /**
    * Remove this object from the data store.
    */
   public void remove() {
-    // TODO: Move this method to a superclass that implements a persistence
-    // layer
-    // TODO: translate to JPA
-    System.out.println("remove(" + ")");
-    // EMF emf = EMF.get();
-    //
-    // Task task = emf.ofy().find(Task.class, this.id);
-    //
-    // if (currentUserId().equals(task.userId)) {
-    // emf.ofy().delete(task);
-    // }
+    String currentUserId = getCurrentUserID();
+
+    if (taskListByUser.containsKey(currentUserId)) {
+      taskListByUser.remove(currentUserId);
+    }
   }
 
   /**
@@ -266,10 +255,10 @@ public class Task {
     this.notes = notes;
   }
 
-  @PrePersist
   void onPersist() {
-    // TODO: Move this method to a superclass that implements a persistence
-    // layer
+    if (id == null) {
+      id = nextId();
+    }
     ++this.version;
   }
 }

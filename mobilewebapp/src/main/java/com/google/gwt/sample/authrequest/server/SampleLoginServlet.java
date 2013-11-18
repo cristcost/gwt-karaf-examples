@@ -28,7 +28,7 @@ public class SampleLoginServlet extends HttpServlet {
       HttpSession session = req.getSession();
       session.invalidate();
       logger.info("Invalidating session");
-      resp.sendRedirect("/");
+      resp.sendRedirect(req.getContextPath());
       return;
     }
 
@@ -49,7 +49,7 @@ public class SampleLoginServlet extends HttpServlet {
 
       String redirectUrl = (String) session.getAttribute("redirectUrl");
       if (redirectUrl == null) {
-        redirectUrl = "/";
+        redirectUrl = req.getContextPath();
       }
 
       logger.info("Redirecting to " + redirectUrl);

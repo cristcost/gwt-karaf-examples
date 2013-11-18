@@ -53,7 +53,7 @@ public class SampleAuthFilter implements Filter {
         // request.
         redirectUrl = "/";
       }
-      response.setHeader("login", createLoginURL(redirectUrl));
+      response.setHeader("login", createLoginURL(request.getContextPath(), redirectUrl));
       response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
       return;
     }
@@ -67,9 +67,9 @@ public class SampleAuthFilter implements Filter {
     return userId != null && userId.length() > 0;
   }
 
-  public String createLoginURL(String redirectUrl) {
+  public String createLoginURL(String contextPath, String redirectUrl) {
     try {
-      return "/login?redirectUrl=" + URLEncoder.encode(redirectUrl, "UTF-8");
+      return contextPath + "/login?redirectUrl=" + URLEncoder.encode(redirectUrl, "UTF-8");
     } catch (UnsupportedEncodingException e) {
       throw new RuntimeException("UTF-8 encoding not supported", e);
     }
