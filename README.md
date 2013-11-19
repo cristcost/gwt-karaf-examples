@@ -1,7 +1,9 @@
 gwt-karaf-examples
 ==================
 
-Selection of Sample projects of GWT adapted to run on Apache Karaf
+Selection of Sample projects of GWT adapted to run on Apache Karaf.
+
+*Work in progress!*
 
 
 Installation instructions (DRAFT):
@@ -29,5 +31,18 @@ http://localhost:8181/gwt-karaf-dynatable/
 http://localhost:8181/gwt-karaf-dynatablerf/
 http://localhost:8181/gwt-karaf-mobilewebapp/
 ```
+
+Limitations
+-----------
+Actually, gwt-karaf-dynatablerf and gwt-karaf-mobilewebapp don't work if started 
+together due to a problem with requestfactory class loading: as the first of the 
+two application receive a requestfactory request, the other application is unable 
+to work properly and a full restart of the osgi environment is required.
+
+I'll explore this issue during the development of https://github.com/cristcost/sensormix
+
+
+
+
 
 
