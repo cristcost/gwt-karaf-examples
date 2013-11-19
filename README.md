@@ -29,3 +29,5 @@ http://localhost:8181/gwt-karaf-dynatable/
 http://localhost:8181/gwt-karaf-dynatablerf/
 http://localhost:8181/gwt-karaf-mobilewebapp/
 ```
+
+
