@@ -3,16 +3,11 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>GDG Firenze :: Sensormix Team and Maven Config</name>
-
-	<groupId>net.cristcost</groupId>
+	<groupId>com.google.gwt.samples.karaf</groupId>
 	<artifactId>gwt-karaf-parent</artifactId>
 	<packaging>pom</packaging>
 	<version>1-SNAPSHOT</version>
-
-	<organization>
-		<name>GDG Firenze :: Sensormix Team</name>
-	</organization>
+	<name>GWT Samples for Apache Karaf :: Parent POM</name>
 
 	<developers>
 		<developer>
@@ -22,31 +17,19 @@
 		</developer>
 	</developers>
 
-	<profiles>
-		<profile>
-			<id>oldgwt</id>
-			<properties>
-			<gwt.version>2.5.1</gwt.version>
-			<gwt.plugin.version>2.5.1</gwt.plugin.version>
-		</properties>
-		</profile>
-	</profiles>
-
 	<properties>
+		<!-- GWT Version properties -->
 		<gwt.version>2.6.0-rc1</gwt.version>
-		<gwt.plugin.version>2.6.0-SNAPSHOT</gwt.plugin.version>
+		<gwt.plugin.version>2.5.1</gwt.plugin.version>
 
-		<!-- Generic properties -->
+		<!-- Generic Build properties -->
 		<java.version>1.7</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Artifacts versions -->
+		<!-- TODO: Cleanup versions not used for these samples -->
 		<activemq.version>5.7.0</activemq.version>
-		<apacheds.version>1.5.7</apacheds.version>
-		<base64.version>2.3.8</base64.version>
-		<batik-transcoder.version>1.7-cristcost-00</batik-transcoder.version>
-		<batik.version>1.7</batik.version>
 		<camel.version>2.10.7</camel.version>
 		<commons-cli.version>1.2</commons-cli.version>
 		<commons-fileupload.version>1.2</commons-fileupload.version>
@@ -103,6 +86,7 @@
 		<zxing.version>2.1</zxing.version>
 
 		<!-- Maven plugins version -->
+		<!-- TODO: Cleanup versions not used for these samples -->
 		<assembly.plugin.version>2.4</assembly.plugin.version>
 		<build-helper.plugin.version>1.8</build-helper.plugin.version>
 		<bundle.plugin.version>2.3.7</bundle.plugin.version>
@@ -117,7 +101,7 @@
 		<jaxws.plugin.version>2.2</jaxws.plugin.version>
 		<jar.plugin.version>2.4</jar.plugin.version>
 		<jdepend.maven.plugin>2.0-beta-2</jdepend.maven.plugin>
-		<jetty.plugin.version>7.6.12.v20130726</jetty.plugin.version><!--stable: 6.1.26, NEWEST 8.1.8.v20121106 -->
+		<jetty.plugin.version>7.6.12.v20130726</jetty.plugin.version>
 		<pmd.plugin.version>2.7.1</pmd.plugin.version>
 		<resources.plugin.version>2.6</resources.plugin.version>
 		<source.plugin.version>2.2.1</source.plugin.version>

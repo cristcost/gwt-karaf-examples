@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
@@ -40,7 +38,6 @@ import javax.validation.constraints.Size;
  * 'http://turbomanage.wordpress.com/2011/03/25/using-gwt-requestfactory-with-ob
  * j e c t i f y / ' >this fine blog post</a>, for an example.
  */
-@Entity
 public class Task {
 
   private static long idCounter = 0;
@@ -145,7 +142,6 @@ public class Task {
     return ++idCounter;
   }
 
-  @Id
   Long id;
 
   private Date dueDate;

@@ -5,14 +5,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>net.cristcost</groupId>
+		<groupId>com.google.gwt.samples.karaf</groupId>
 		<version>1.0.0-SNAPSHOT</version>
 		<artifactId>gwt-karaf-main</artifactId>
 	</parent>
 
 	<artifactId>gwt-karaf-starter</artifactId>
 	<packaging>war</packaging>
-	<name>GWT on Karaf Examples :: Starter Sample</name>
+	<name>GWT Samples for Apache Karaf :: Starter Sample</name>
 
 	<dependencies>
 
