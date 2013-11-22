@@ -8,16 +8,21 @@ Selection of Sample projects of GWT adapted to run on Apache Karaf.
 
 Installation instructions (DRAFT):
 ```
-git clone gwt 
-git patch with https://gwt-review.googlesource.com/#/c/5351/
+svn co http://google-web-toolkit.googlecode.com/svn/tools/ tools
+mkdir -p tools/bnd/lib
+wget -O tools/lib/bnd/bnd-1.50.0.jar http://search.maven.org/remotecontent?filepath=biz/aQute/bnd/1.50.0/bnd-1.50.0.jar
+
+git clone https://gwt.googlesource.com/gwt 
+# the final '7' might change in the meantime, check at https://gwt-review.googlesource.com/#/c/5351/
+git fetch https://gwt.googlesource.com/gwt refs/changes/51/5351/7 && git checkout FETCH_HEAD
 export GWT_VERSION=2.6.0-rc1 in order to be used as osgi export version
 ant dist
 cd maven
 ./push-gwt.sh
 
-git clone this repo
+git clone https://github.com/cristcost/gwt-karaf-examples.git
 mvn clean install
-download servicemix http://www.apache.org/dyn/closer.cgi?path=servicemix/servicemix-4/4.5.3/apache-servicemix-4.5.3.tar.gz
+wget http://www.apache.org/dyn/closer.cgi?path=servicemix/servicemix-4/4.5.3/apache-servicemix-4.5.3.tar.gz
 tar xzf apache-servicemix-4.5.3.tar.gz
 cd servicemix
 bin/servicemix
